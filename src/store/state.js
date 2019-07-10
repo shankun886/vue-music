@@ -2,6 +2,9 @@
 //1.首先定义state，2.对getters做映射，可以根据state不同值计算一个新值
 //3.要修改数据，定义mutations，先写mutation-types
 //4.actions  异步修改或者对mutations做封装，通过调用1个actions来修改多个mutations的目的
+import { getStorage, getPlayStorage, getFavorite } from '@/common/js/cache.js'
+
+
 const playMode = {
   sequence: 0, // 顺序播放
   loop: 1, // 单曲循环
@@ -28,7 +31,7 @@ const state = {
 	// 歌曲排行数据
 	rankList: {},
   	// 搜索结果
-  	//searchHistory: getStorage(),
+  	searchHistory: getStorage(),
   	// 播放历史（最近播放）
   	//playHistory: getPlayStorage(),
   	// 我的收藏

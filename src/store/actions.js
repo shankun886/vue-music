@@ -1,6 +1,7 @@
 //异步修改或者对mutations做封装
 import * as types from './mutation-types.js'
 import {shuffle} from '@/common/js/util.js'
+import { localSave, localDel, localClear, savePlay, saveFavorite, delFavorite } from '@/common/js/cache.js'
 //music-list里点击选择音乐提交修改多个mutations（ 顺序播放列表，播放歌曲列表，当前索引，是否播放，播放是否全屏）
 
 function findIndex(list, song) {
@@ -83,4 +84,28 @@ export const insertSong = function ({commit, state}, song) {
   commit(types.SET_CURRENT_INDEX, currentIndex)
   commit(types.SET_PLAYING_STATE, true)
   commit(types.SET_FULL_SCREEN, true)
+}
+
+/**
+ * 保存搜索历史
+ * @param  {[type]} query          搜索关键词
+ */
+export const saveHistory = function ({commit}, query) {
+  commit(types.SET_SEARCH_HISTORY, localSave(query))
+}
+
+/**
+ * 删除单个搜索历史
+ * @param  {[type]} query          搜索关键词
+ */
+export const delHistory = function ({commit}, query) {
+  commit(types.SET_SEARCH_HISTORY, localDel(query))
+}
+
+/**
+ * 删除全部搜索历史
+ * @param  {[type]} query          搜索关键词
+ */
+export const clearHistory = function ({commit}) {
+  commit(types.SET_SEARCH_HISTORY, localClear())
 }

@@ -69,7 +69,7 @@
   				}else {
   					this.insertSong(item)
   				}
-  				
+  				this.$emit('select')
   			},
   			searchMore() {
   				if (!this.hasMore) {
@@ -131,6 +131,9 @@
 		    	//search.vue
 		      	this.$emit('beforeScroll')
 		    },
+		    refresh() {
+		    	this.$refs.suggest.refresh()
+		    }
   		},
   		watch: {
   			query() {
