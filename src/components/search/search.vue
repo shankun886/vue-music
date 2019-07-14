@@ -4,7 +4,7 @@
 			<search-box ref="searchBox" @query="onQueryChange"></search-box>
 		</div>
 		<div class="shortcut-wrapper" v-show="!query" ref="shortcutWrapperRef">
-			<scroll class="shortcut" :data="scrollData" ref="scrollRef">
+			<scroll class="shortcut" :data="scrollData" ref="scrollRef" :refreshDelay="refreshDelay">
 				<div>
 					<div class="hot-key">
 						<h1 class="title">热门搜索</h1>
@@ -28,7 +28,7 @@
 			</scroll>
 		</div>
 		<div class="search-result" v-show="query" ref="resultRef">
-			<suggest :query="query" @beforeScroll="blurInput" @select="savaSearch"></suggest>
+			<suggest :query="query" @beforeScroll="blurInput" @select="savaSearch" ref="suggest"></suggest>
 		</div>
 		<confirm ref="confirm" @confirm="confirm" @cancel="cancel"></confirm>
 		<router-view></router-view>

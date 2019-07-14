@@ -33,7 +33,7 @@ const state = {
   	// 搜索结果
   	searchHistory: getStorage(),
   	// 播放历史（最近播放）
-  	//playHistory: getPlayStorage(),
+  	playHistory: getPlayStorage(),
   	// 我的收藏
   	//favoriteList: getFavorite()
 }

@@ -22,3 +22,5 @@ export const songlist = state => state.songlist
 export const rankList = state => state.rankList
 
 export const searchHistory = state => state.searchHistory
+
+export const playHistory = state => state.playHistory

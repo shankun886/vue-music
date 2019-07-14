@@ -95,11 +95,12 @@
 						<i :class="playing ? 'icon-pause-mini' : 'icon-play-mini'" @click.stop="togglePlaying" class="icon-mini"></i>
 					</progress-circle>
 				</div>
-				<div class="control">
+				<div class="control" @click.stop="showPlaylist">
           			<i class="icon-playlist"></i>
         		</div>
 			</div>
 		</transition>
+		<playlist ref="playlist"></playlist>
 		<audio :src="currentSong.url" ref="audio" 
 			@play="ready"
 			@error="error"
@@ -109,18 +110,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-	import {mapGetters, mapMutations} from 'vuex'
+	import {mapGetters, mapMutations,mapActions} from 'vuex'
 	import createkeyframeAnimation from 'create-keyframe-animation'
 	import ProgressBar from '@/base/progress-bar'
 	import ProgressCircle from '@/base/progress-circle'
 	import {shuffle} from '@/common/js/util'
 	import Lyric from 'lyric-parser' // QQ音乐 歌词解析 https://github.com/ustbhuangyi/lyric-parser
+	import Playlist from '@/components/playlist/playlist'
 	import Scroll from '@/base/scrollview'
 	export default {
 		components: {
 			ProgressBar,
 			ProgressCircle,
-			Scroll
+			Scroll,
+			Playlist
 		},
 		data() {
 			return {
@@ -204,6 +207,10 @@
 			}
 		},
 		methods: {
+			...mapActions(['saveplayHistory', 'savefavoriteList', 'delfavoriteList']),
+			showPlaylist() {
+				this.$refs.playlist.show()
+			},
 			togglePlaying() {
 				if (!this.songReady) {
 					return
@@ -222,6 +229,7 @@
 			},
 			ready() {
 				this.songReady = true
+				this.saveplayHistory(this.currentSong)
 			},
 			error() {
 				this.songReady = true
@@ -241,7 +249,7 @@
 		        	}
 		        	this.setCurrentIndex(index)
 		        	if (!this.playing) {
-		          	this.togglePlaying()
+		          		this.togglePlaying()
 		        	}
 		      	}
 			},
