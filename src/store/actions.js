@@ -150,3 +150,12 @@ export const deleteSongList = function ({commit, state}, song) {
 export const saveplayHistory = function ({commit}, song) {
   commit(types.SET_PLAYHISTORY, savePlay(song))
 }
+
+// 我的收藏
+export const savefavoriteList = function ({commit}, song) {
+  commit(types.SET_FAVORITE_LIST, saveFavorite(song))
+}
+
+export const delfavoriteList = function ({commit}, song) {
+  commit(types.SET_FAVORITE_LIST, delFavorite(song))
+}

@@ -15,8 +15,8 @@
 						<li :key="item.id" class="item" v-for="(item,index) in sequenceList" @click="selectItem(item,index)" ref="listRef">
 							<i class="current" :class="getCurrentIcon(item)"></i>
 							<span class="text">{{item.name}}</span>
-							<span class="like">
-								<i class="icon-not-favorite"></i>
+							<span class="like" @click.stop="toggleFavoriteCls(item)">
+								<i :class="getFavoriteCls(item)"></i>
 							</span>
 							<span class="delete" @click.stop="deleteOne(item)">
 								<i class="icon-delete"></i>
@@ -61,6 +61,27 @@
 		      	setPlayList: 'SET_PLAYLIST'
 		    }),
 		    ...mapActions(['deleteSong', 'deleteSongList', 'savefavoriteList', 'delfavoriteList']),
+		    toggleFavoriteCls(song) {
+	      		if (this._isFavorite(song)) {
+	        		this.delfavoriteList(song)
+	      		} else {
+	        	this.savefavoriteList(song)
+	      		}
+	    	},
+	    	getFavoriteCls(song) {
+	      		if (this._isFavorite(song)) {
+	        		return 'icon-favorite'
+	      		} else {
+	        		return 'icon-not-favorite'
+	      		}
+	    	},
+	    	_isFavorite(song) {
+	      		let index = this.favoriteList.findIndex((item) => {
+	        		return song.id === item.id
+	      		})
+
+	      		return index > -1
+	    	},
 		    showConfirm() {
 		    	this.$refs.confirm.show()
 		    },

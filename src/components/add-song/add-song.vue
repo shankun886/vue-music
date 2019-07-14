@@ -45,7 +45,7 @@
 	import Scroll from '@/base/scrollview'
 	import SearchList from '@/base/search-list'
 	import SongList from '@/base/song-list'
-	import Song from '@/common/js/song.js'
+	import {Song} from '@/common/js/song.js'
 	import TopTip from '@/base/top-tip'
 	import { mapActions, mapGetters } from 'vuex'
 	export default {
@@ -179,15 +179,15 @@
 			top: 124px
 			bottom: 0
 			width:100%
-			.tip-title
-				text-align: center
-				padding: 18px 0
-				font-size: 0
-				.icon-ok
-					font-size: $font-size-medium
-					color: $color-theme
-					margin-right: 44px
-				.text
-					font-size: $font-size-medium
-					color: $color-text
+		.tip-title
+			text-align: center
+			padding: 18px 0
+			font-size: 0
+			.icon-ok
+				font-size: $font-size-medium
+				color: $color-theme
+				margin-right: 44px
+			.text
+				font-size: $font-size-medium
+				color: $color-text
 </style>

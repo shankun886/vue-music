@@ -74,7 +74,7 @@
 							<i class="icon-next" @click="next"></i>
 						</div>
 						<div class="icon i-right">
-							<i class="icon icon-not-favorite"></i>
+							<i class="icon" :class="getFavoriteCls(currentSong)" @click="toggleFavoriteCls(currentSong)"></i>
 						</div>
 					</div>
 				</div>
@@ -157,7 +157,8 @@
 				'playing',
 				'currentIndex',
 				'mode',
-				'sequenceList'
+				'sequenceList',
+				'favoriteList'
 			]),
 			percent() {
 				return this.currentTime / this.currentSong.duration 
@@ -208,6 +209,27 @@
 		},
 		methods: {
 			...mapActions(['saveplayHistory', 'savefavoriteList', 'delfavoriteList']),
+		    getFavoriteCls(song) {
+		      	if (this._isFavorite(song)) {
+		        	return 'icon-favorite'
+		      	} else {
+		        	return 'icon-not-favorite'
+		      	}
+		    },
+		    toggleFavoriteCls(song) {
+		      	if (this._isFavorite(song)) {
+		        	this.delfavoriteList(song)
+		      	} else {
+		       	 	this.savefavoriteList(song)
+		      	}
+		    },
+		    _isFavorite(song) {
+		      	let index = this.favoriteList.findIndex((item) => {
+		        	return song.id === item.id
+		      	})
+
+		      	return index > -1
+		    },
 			showPlaylist() {
 				this.$refs.playlist.show()
 			},

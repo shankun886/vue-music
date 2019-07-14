@@ -59,7 +59,8 @@
   		data() {
   			return {
   				hotkey:[],
-  				query: ''
+  				query: '',
+  				refreshDelay: 100
   			}
   		},
   		watch: {
